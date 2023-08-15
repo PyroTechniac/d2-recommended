@@ -1,10 +1,9 @@
 import { type FC } from 'react';
-// import Manifest from './components/Manifest';
-import Loader from './components/Loader';
+import Manifest from './components/Manifest';
 
 export const App: FC = () => {
     return (
-        <Loader />
+        <Manifest />
     )
 }
 
