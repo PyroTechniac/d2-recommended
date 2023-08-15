@@ -17,7 +17,7 @@ export default defineConfig({
         strictPort: true,
     },
     define: {
-        __LOADOUT_EDITOR_FLAVOR__: JSON.stringify(debug ? 'dev' : 'prod'),
+        __D2_RECOMMENDED_FLAVOR__: JSON.stringify(debug ? 'dev' : 'prod'),
     },
     build: {
         target: ['es2021', 'chrome100', 'safari13'],
