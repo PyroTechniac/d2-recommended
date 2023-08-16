@@ -140,10 +140,10 @@ export const createHttpClient =
 				...(config.body ? { 'Content-Type': 'application/json' } : undefined),
 			},
 			credentials: 'omit',
-			mode: 'no-cors',
 		});
 
 		const response = await fetchFunction(fetchOptions);
+		console.log(response);
 		let data: T | undefined;
 		let parseError: Error | undefined;
 		try {
