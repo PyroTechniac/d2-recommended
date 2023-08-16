@@ -1,4 +1,5 @@
 export * from './api';
+export * from './error';
 export * from './log';
 
 export const convertToError = (e: unknown): Error =>

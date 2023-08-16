@@ -1,8 +1,14 @@
-import { type FC } from 'react';
-import Manifest from './components/Manifest';
+import { type FC, lazy } from 'react';
+import { ErrorBoundary } from './components/Error';
+
+const Manifest = lazy(() => import('./components/Manifest'));
 
 export const App: FC = () => {
-	return <Manifest />;
+	return (
+		<ErrorBoundary name='D2 Recommended Root'>
+			<Manifest />
+		</ErrorBoundary>
+	)
 };
 
 App.whyDidYouRender = true;
