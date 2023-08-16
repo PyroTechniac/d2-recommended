@@ -5,10 +5,10 @@ const Manifest = lazy(() => import('./components/Manifest'));
 
 export const App: FC = () => {
 	return (
-		<ErrorBoundary name='D2 Recommended Root'>
+		<ErrorBoundary name="D2 Recommended Root">
 			<Manifest />
 		</ErrorBoundary>
-	)
+	);
 };
 
 App.whyDidYouRender = true;

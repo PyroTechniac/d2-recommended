@@ -28,24 +28,24 @@ const logThrottle = (timesThrottled: number, waitTime: number, url: string): voi
 		url,
 	);
 
-const errorHandledHttpClient = (httpClient: HttpClient): HttpClient => async (config: HttpClientConfig) => {
-	try {
-		return await httpClient(config);
-	} catch (e) {
-		handleErrors(e);
-		throw new RecommendedError('Difficulties'); // this site is not reachable.
-	}
-}
-
+const errorHandledHttpClient =
+	(httpClient: HttpClient): HttpClient =>
+	async (config: HttpClientConfig) => {
+		try {
+			return await httpClient(config);
+		} catch (e) {
+			handleErrors(e);
+			throw new RecommendedError('Difficulties'); // this site is not reachable.
+		}
+	};
 
 const handleErrors = (error: unknown): never => {
-	if (error instanceof DOMException && error.name === "AbortError") {
+	if (error instanceof DOMException && error.name === 'AbortError') {
 		throw (
 			navigator.onLine
 				? new RecommendedError('SlowResponse')
 				: new RecommendedError('NotConnected')
-		)
-			.withError(error);
+		).withError(error);
 	}
 
 	if (error instanceof SyntaxError) {
@@ -104,7 +104,10 @@ const handleErrors = (error: unknown): never => {
 			case PlatformErrorCodes.WebAuthModuleAsyncFailed:
 				throw new RecommendedError('NotLoggedIn').withError(error);
 			case PlatformErrorCodes.DestinyAccountNotFound:
-				if (error.endpoint?.includes('/Account/') && !error.endpoint.includes('/Character/')) {
+				if (
+					error.endpoint?.includes('/Account/') &&
+					!error.endpoint.includes('/Character/')
+				) {
 					throw new RecommendedError('NoAccount').withError(error);
 				} else {
 					throw new RecommendedError('Difficulties').withError(error);
@@ -128,7 +131,7 @@ const handleErrors = (error: unknown): never => {
 
 	errorLog('bungie api', 'No response data:', error);
 	throw new RecommendedError('Difficulties').withError(error);
-}
+};
 
 export const unauthenticatedHttpClient = errorHandledHttpClient(
 	responsivelyThrottleHttpClient(
