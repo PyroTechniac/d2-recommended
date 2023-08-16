@@ -137,6 +137,7 @@ export const createHttpClient =
 			body: config.body ? JSON.stringify(config.body) : undefined,
 			headers: {
 				'X-API-Key': apiKey,
+				'Origin': window.origin,
 				...(config.body ? { 'Content-Type': 'application/json' } : undefined),
 			},
 			credentials: 'omit',
