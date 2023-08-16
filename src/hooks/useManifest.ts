@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../utils';
 
-export const useManifest = () => {
+export const useManifest = (): unknown => {
     const { data } = useQuery({
         queryKey: ['manifest'],
         queryFn: async () => {
@@ -11,5 +11,5 @@ export const useManifest = () => {
         }
     });
 
-    return data!;
+    return data!.Response;
 }

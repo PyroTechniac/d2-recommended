@@ -7,11 +7,8 @@ export const Manifest: FC = () => {
     console.log(manifest);
 
     return (
-        <>
-            <div>Hello, world!</div>
-            <p>{JSON.stringify(manifest)}</p>
-        </>
-    );
+        <div>Manifest loaded</div>
+    )
 }
 
 Manifest.whyDidYouRender = true;

@@ -1,6 +1,8 @@
+import { DestinyResponse } from "../types/destiny-response";
+
 const base = 'https://www.bungie.net/Platform';
 
-export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
+export const apiFetch = async <T>(endpoint: string, options: RequestInit = {}): Promise<DestinyResponse<T>> => {
     const res = await fetch(`${base}${endpoint}`, {
         headers: {
             ...options.headers,

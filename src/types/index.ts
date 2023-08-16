@@ -1,0 +1,1 @@
+export * as destiny from './destiny-response';
