@@ -17,10 +17,12 @@
 	"dependencies": {
 		"@tanstack/react-query": "^4.32.6",
 		"@tanstack/react-query-devtools": "^4.32.6",
+		"bungie-api-ts": "^5.0.0",
 		"clsx": "^2.0.0",
 		"dotenv": "^16.3.1",
 		"flubber": "^0.4.2",
 		"framer-motion": "^10.15.2",
+		"lodash": "^4.17.21",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router": "^6.15.0",
@@ -28,6 +30,8 @@
 		"zustand": "^4.4.1"
 	},
 	"devDependencies": {
+		"@types/lodash": "^4.14.197",
+		"@types/node": "^20.5.0",
 		"@types/react": "^18.2.15",
 		"@types/react-dom": "^18.2.7",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",

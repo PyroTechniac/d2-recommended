@@ -1,1 +1,7 @@
-export * as destiny from './destiny-response';
+import type { ReactNode } from 'react';
+
+export * from './manifest';
+
+export interface CommonProps {
+	children?: ReactNode;
+}

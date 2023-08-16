@@ -1,15 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
-import { apiFetch } from '../utils';
+import { useQuery } from "@tanstack/react-query";
+import { type GetAllDestinyManifestComponentsParams, getAllDestinyManifestComponents, getDestinyManifest } from "bungie-api-ts/destiny2";
+import { unauthenticatedHttpClient } from "../utils";
 
-export const useManifest = (): unknown => {
-    const { data } = useQuery({
-        queryKey: ['manifest'],
-        queryFn: async () => {
-            const res = await apiFetch('/Destiny2/Manifest');
+export const useManifest = () => useQuery({
+    queryKey: ['manifest'],
+    queryFn: async () => {
+        const manifest = (await getDestinyManifest(unauthenticatedHttpClient)).Response;
 
-            return res;
-        }
-    });
+        const options: GetAllDestinyManifestComponentsParams = { destinyManifest: manifest, language: 'en' };
 
-    return data!.Response;
-}
+        return getAllDestinyManifestComponents(unauthenticatedHttpClient, options);
+    },
+});

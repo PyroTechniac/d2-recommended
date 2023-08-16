@@ -2,10 +2,8 @@ import { type FC } from 'react';
 import Manifest from './components/Manifest';
 
 export const App: FC = () => {
-    return (
-        <Manifest />
-    )
-}
+	return <Manifest />;
+};
 
 App.whyDidYouRender = true;
 

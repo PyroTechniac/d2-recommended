@@ -2,5 +2,5 @@
 declare const __D2_RECOMMENDED_FLAVOR__: 'dev' | 'prod';
 
 interface ImportMetaEnv {
-    readonly VITE_API_KEY: string;
+	readonly VITE_API_KEY: string;
 }

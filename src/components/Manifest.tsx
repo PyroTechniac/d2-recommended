@@ -2,14 +2,14 @@ import { type FC } from 'react';
 import { useManifest } from '../hooks';
 
 export const Manifest: FC = () => {
-    const manifest = useManifest();
+	const { data, error } = useManifest();
 
-    console.log(manifest);
+	if (error) return <div>Manifest failed to load</div>;
 
-    return (
-        <div>Manifest loaded</div>
-    )
-}
+	console.log(data);
+
+	return <div>Manifest loaded</div>;
+};
 
 Manifest.whyDidYouRender = true;
 
