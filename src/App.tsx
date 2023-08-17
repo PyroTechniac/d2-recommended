@@ -1,10 +1,9 @@
-import { type FC, useState } from 'react';
+import { type FC, useState, lazy } from 'react';
 import { ErrorBoundary } from './components/Error';
 import Suspense from './components/Suspense';
 import ScrollToTop from './components/ScrollToTop';
-import Manifest from './components/Manifest';
 
-// const Manifest = lazy(() => import('./components/Manifest'));
+const Manifest = lazy(() => import('./components/Manifest'));
 
 export const App: FC = () => {
 	const [manifest, setManifest] = useState(false);
