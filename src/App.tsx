@@ -1,4 +1,4 @@
-import { type FC, lazy } from 'react';
+import { lazy, type FC } from 'react';
 import { ErrorBoundary } from './components/Error';
 import { ScrollToTop, Suspense } from './components/utils';
 import { useIsFetching, useIsRestoring } from '@tanstack/react-query';

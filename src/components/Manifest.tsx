@@ -2,8 +2,6 @@ import { type FC } from 'react';
 import { useManifest } from '../hooks';
 import ItemIcon from './ItemIcon';
 
-// const ItemIcon = lazy(() => import('./ItemIcon'));
-
 export const Manifest: FC = () => {
 	const data = useManifest();
 

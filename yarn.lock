@@ -570,25 +570,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-persist-client-core@npm:5.0.0-beta.15":
-  version: 5.0.0-beta.15
-  resolution: "@tanstack/query-persist-client-core@npm:5.0.0-beta.15"
-  dependencies:
-    "@tanstack/query-core": 5.0.0-beta.15
-  checksum: 21cc6512047ee983c1e0508e31719f29676de4963a405607a6c74c22714caefbd870804a17e09c296d4d5390150bf83da5cf06959bf04a91e2a80c05ed448d2f
-  languageName: node
-  linkType: hard
-
-"@tanstack/query-sync-storage-persister@npm:5.0.0-beta.15":
-  version: 5.0.0-beta.15
-  resolution: "@tanstack/query-sync-storage-persister@npm:5.0.0-beta.15"
-  dependencies:
-    "@tanstack/query-core": 5.0.0-beta.15
-    "@tanstack/query-persist-client-core": 5.0.0-beta.15
-  checksum: dd1c8513a10a1cf12dcbc53ced9807a290ec980f723493ea38ef2acf070e68863db5e7cb1d0c74980b332087580cb40719435b6b2264e6e18e0cffe8ade92c52
-  languageName: node
-  linkType: hard
-
 "@tanstack/react-query-devtools@npm:5.0.0-beta.16":
   version: 5.0.0-beta.16
   resolution: "@tanstack/react-query-devtools@npm:5.0.0-beta.16"
@@ -599,19 +580,6 @@ __metadata:
     react: ^18.0.0
     react-dom: ^18.0.0
   checksum: 0842810e0ee4c61d39637338bdfda2fbf8d4eb19407747873d1beb6cb4e59bfe56aa9fb65ac0d87e6e4d4645d705503e88596053b6aed5028a24597ce7a02aab
-  languageName: node
-  linkType: hard
-
-"@tanstack/react-query-persist-client@npm:5.0.0-beta.16":
-  version: 5.0.0-beta.16
-  resolution: "@tanstack/react-query-persist-client@npm:5.0.0-beta.16"
-  dependencies:
-    "@tanstack/query-persist-client-core": 5.0.0-beta.15
-  peerDependencies:
-    "@tanstack/react-query": ^5.0.0-beta.16
-    react: ^18.0.0
-    react-dom: ^18.0.0
-  checksum: 8e1fa089bf03b22597f4d2f1a78451aa505181cf95f22d4c7032cff72b4cedcb13e6250d0a650dc110a7815fc5a0afb3c198de79114b6f783a37c595043ee01d
   languageName: node
   linkType: hard
 
@@ -1369,10 +1337,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "d2-recommended@workspace:."
   dependencies:
-    "@tanstack/query-sync-storage-persister": 5.0.0-beta.15
     "@tanstack/react-query": 5.0.0-beta.16
     "@tanstack/react-query-devtools": 5.0.0-beta.16
-    "@tanstack/react-query-persist-client": 5.0.0-beta.16
     "@types/lodash": ^4.14.197
     "@types/node": ^20.5.0
     "@types/react": ^18.2.15

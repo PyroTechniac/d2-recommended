@@ -1,12 +1,10 @@
 import { type FC, StrictMode } from 'react';
 import App from './App';
 import { setupRateLimiter } from './utils';
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Suspense } from './components/utils';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ErrorBoundary } from './components/Error';
-import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
-import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import ErrorBoundary from './components/Error';
 
 setupRateLimiter();
 
@@ -15,29 +13,22 @@ const queryClient = new QueryClient({
 		queries: {
 			retry: false,
 			refetchOnWindowFocus: false,
-			gcTime: 1000 * 60 * 60 * 24,
+			gcTime: 30000,
 		},
 	},
-});
-
-const persister = createSyncStoragePersister({
-	storage: window.localStorage,
 });
 
 export const Root: FC = () => {
 	return (
 		<StrictMode>
-			<PersistQueryClientProvider
-				client={queryClient}
-				persistOptions={{ persister, maxAge: 1000 * 60 * 60 * 24 }}
-			>
+			<QueryClientProvider client={queryClient}>
 				<ReactQueryDevtools initialIsOpen />
 				<ErrorBoundary name="Root">
 					<Suspense>
 						<App />
 					</Suspense>
 				</ErrorBoundary>
-			</PersistQueryClientProvider>
+			</QueryClientProvider>
 		</StrictMode>
 	);
 };

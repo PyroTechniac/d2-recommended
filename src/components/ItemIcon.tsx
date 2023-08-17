@@ -4,7 +4,7 @@ import { useManifest } from '../hooks';
 export const ItemIcon: FC = () => {
 	const data = useManifest();
 
-	const all = data!.InventoryItem.getAll();
+	const all = data.InventoryItem.getAll();
 
 	const firstKey = parseInt(Object.keys(all)[100]);
 
