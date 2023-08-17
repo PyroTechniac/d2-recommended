@@ -20,7 +20,6 @@
 		"bungie-api-ts": "^5.0.0",
 		"clsx": "^2.0.0",
 		"dotenv": "^16.3.1",
-		"flubber": "^0.4.2",
 		"framer-motion": "^10.15.2",
 		"lodash": "^4.17.21",
 		"react": "^18.2.0",
