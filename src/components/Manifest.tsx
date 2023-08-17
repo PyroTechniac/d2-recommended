@@ -4,9 +4,9 @@ import { useManifest } from '../hooks';
 export const Manifest: FC = () => {
 	const { data, error } = useManifest();
 
-	if (error) return <div>Manifest failed to load</div>;
-
 	console.log(data);
+
+	if (error) return <div>Manifest failed to load</div>;
 
 	return <div>Manifest loaded</div>;
 };

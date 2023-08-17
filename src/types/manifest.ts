@@ -104,7 +104,7 @@ export interface DestinyManifestDefinitions {
 
 type ManifestTablesShort = keyof DestinyManifestDefinitions;
 
-const lazyTables: ManifestTablesShort[] = [
+export const lazyTables: ManifestTablesShort[] = [
 	'InventoryItem',
 	'Objective',
 	'SandboxPerk',
@@ -139,7 +139,7 @@ const lazyTables: ManifestTablesShort[] = [
 	'LoadoutColor',
 ];
 
-const eagerTables: ManifestTablesShort[] = [
+export const eagerTables: ManifestTablesShort[] = [
 	'InventoryBucket',
 	'Class',
 	'Gender',

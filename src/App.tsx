@@ -1,12 +1,15 @@
-import { type FC, lazy } from 'react';
+import { type FC, lazy, useState } from 'react';
 import { ErrorBoundary } from './components/Error';
 
 const Manifest = lazy(() => import('./components/Manifest'));
 
 export const App: FC = () => {
+	const [showManifest, setShowManifest] = useState(false);
+
 	return (
 		<ErrorBoundary name="D2 Recommended Root">
-			<Manifest />
+			<button onClick={() => setShowManifest(true)}>Load Manifest</button>
+			{showManifest && (<Manifest />)}
 		</ErrorBoundary>
 	);
 };
