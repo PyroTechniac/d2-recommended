@@ -134,20 +134,20 @@ export const createHttpClient =
 
 		url = `${url}?d2-recommended`;
 
+		const headers = new Headers();
+
+		if (config.body) headers.set('Content-Type', 'application/json');
+
+		if (url.includes('/Platform/')) headers.set('X-API-Key', apiKey);
+
 		const fetchOptions = new Request(url, {
 			method: config.method,
 			body: config.body ? JSON.stringify(config.body) : undefined,
-			headers: {
-				'X-API-Key': apiKey,
-				...(config.body ? { 'Content-Type': 'application/json' } : undefined),
-			},
+			headers,
 			credentials: 'omit',
 		});
-		console.log(fetchOptions);
-		console.log([...fetchOptions.headers]);
+
 		const response = await fetchFunction(fetchOptions);
-		console.log(response);
-		console.log([...response.headers]);
 		let data: T | undefined;
 		let parseError: Error | undefined;
 		try {
