@@ -1,7 +1,6 @@
 import { type FC, useState, lazy } from 'react';
 import { ErrorBoundary } from './components/Error';
-import Suspense from './components/Suspense';
-import ScrollToTop from './components/ScrollToTop';
+import { Suspense, ScrollToTop } from './components/utils';
 
 const Manifest = lazy(() => import('./components/Manifest'));
 

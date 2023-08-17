@@ -3,7 +3,7 @@ import App from './App';
 import { setupRateLimiter } from './utils';
 import { FeatureBundle, LazyMotion } from 'framer-motion';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Suspense from './components/Suspense';
+import { Suspense } from './components/utils';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const domAnimation = (): Promise<FeatureBundle> =>
@@ -14,7 +14,6 @@ setupRateLimiter();
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			suspense: true,
 			retry: false,
 			refetchOnWindowFocus: false,
 		},
@@ -25,7 +24,7 @@ export const Root: FC = () => {
 	return (
 		<StrictMode>
 			<QueryClientProvider client={queryClient}>
-				<ReactQueryDevtools />
+				<ReactQueryDevtools initialIsOpen />
 				<Suspense>
 					<LazyMotion features={domAnimation} strict>
 						<App />

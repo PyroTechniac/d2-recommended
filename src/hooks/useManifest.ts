@@ -1,4 +1,4 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import { type UseSuspenseQueryResult, useSuspenseQuery } from '@tanstack/react-query';
 import {
 	type GetAllDestinyManifestComponentsParams,
 	getAllDestinyManifestComponents,
@@ -7,14 +7,14 @@ import { dedupPromise, unauthenticatedHttpClient } from '../utils';
 import useRawManifest from './useRawManifest';
 import { DestinyManifestDefinitions, buildDefinitionsFromManifest } from '../types';
 
-export const useManifest = (): UseQueryResult<DestinyManifestDefinitions> => {
-	const { data, isSuccess } = useRawManifest();
+export const useManifest = (): UseSuspenseQueryResult<DestinyManifestDefinitions> => {
+	const { data } = useRawManifest();
 
-	return useQuery(
-		['manifest'],
-		() => {
+	return useSuspenseQuery({
+		queryKey: ['manifest'],
+		queryFn: () => {
 			const options: GetAllDestinyManifestComponentsParams = {
-				destinyManifest: data!,
+				destinyManifest: data,
 				language: 'en',
 			};
 
@@ -22,6 +22,7 @@ export const useManifest = (): UseQueryResult<DestinyManifestDefinitions> => {
 
 			return fetcher(unauthenticatedHttpClient, options).then(buildDefinitionsFromManifest);
 		},
-		{ enabled: isSuccess },
-	);
+	});
 };
+
+export default useManifest;
