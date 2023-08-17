@@ -5,6 +5,7 @@ import {
 } from 'bungie-api-ts/destiny2';
 import { unauthenticatedHttpClient } from '../utils';
 import useRawManifest from './useRawManifest';
+import { buildDefinitionsFromManifest } from '../types';
 
 export const useManifest = () => {
 	const { data } = useRawManifest();
@@ -17,7 +18,12 @@ export const useManifest = () => {
 				language: 'en',
 			};
 
-			return getAllDestinyManifestComponents(unauthenticatedHttpClient, options);
+			const manifest = await getAllDestinyManifestComponents(
+				unauthenticatedHttpClient,
+				options,
+			);
+
+			return buildDefinitionsFromManifest(manifest);
 		},
 		enabled: !!data,
 	});

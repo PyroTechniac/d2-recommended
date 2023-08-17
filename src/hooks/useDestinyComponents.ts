@@ -7,25 +7,25 @@ import {
 import { unauthenticatedHttpClient } from '../utils';
 import useRawManifest from './useRawManifest';
 
-export const useDestinyComponents = (keys: string[]) => {
+export const useDestinyComponents = <T extends readonly DestinyManifestComponentName[]>(
+	keys: T,
+) => {
 	const { data } = useRawManifest();
 
 	return useQueries({
-		queries: keys
-			.map((t) => `Destiny${t}Definition` as DestinyManifestComponentName)
-			.map((table) => ({
-				queryKey: ['component', table],
-				queryFn: async () => {
-					const options: GetDestinyManifestComponentParams<typeof table> = {
-						destinyManifest: data!,
-						language: 'en',
-						tableName: table,
-					};
+		queries: keys.map((table) => ({
+			queryKey: ['component', table],
+			queryFn: async () => {
+				const options: GetDestinyManifestComponentParams<typeof table> = {
+					destinyManifest: data!,
+					language: 'en',
+					tableName: table,
+				};
 
-					return getDestinyManifestComponent(unauthenticatedHttpClient, options);
-				},
-				enabled: !!data,
-			})),
+				return getDestinyManifestComponent(unauthenticatedHttpClient, options);
+			},
+			enabled: !!data,
+		})),
 	});
 };
 
