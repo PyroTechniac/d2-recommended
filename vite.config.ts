@@ -22,9 +22,9 @@ export default defineConfig({
         __D2_RECOMMENDED_FLAVOR__: JSON.stringify(debug ? 'dev' : 'prod'),
     },
     build: {
-        target: ['es2021', 'chrome100', 'safari13'],
         minify: !debug ? 'esbuild' : false,
         sourcemap: debug,
+        manifest: true,
     },
     plugins: [
         react({
