@@ -1,32 +1,27 @@
-import { useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import {
 	type GetAllDestinyManifestComponentsParams,
 	getAllDestinyManifestComponents,
 } from 'bungie-api-ts/destiny2';
-import { unauthenticatedHttpClient } from '../utils';
+import { dedupPromise, unauthenticatedHttpClient } from '../utils';
 import useRawManifest from './useRawManifest';
-import { buildDefinitionsFromManifest } from '../types';
+import { DestinyManifestDefinitions, buildDefinitionsFromManifest } from '../types';
 
-export const useManifest = () => {
-	const { data } = useRawManifest();
+export const useManifest = (): UseQueryResult<DestinyManifestDefinitions> => {
+	const { data, isSuccess } = useRawManifest();
 
-	return useQuery({
-		queryKey: ['manifest'],
-		queryFn: async () => {
+	return useQuery(
+		['manifest'],
+		() => {
 			const options: GetAllDestinyManifestComponentsParams = {
 				destinyManifest: data!,
 				language: 'en',
 			};
 
-			const manifest = await getAllDestinyManifestComponents(
-				unauthenticatedHttpClient,
-				options,
-			);
+			const fetcher = dedupPromise(getAllDestinyManifestComponents);
 
-			return buildDefinitionsFromManifest(manifest);
+			return fetcher(unauthenticatedHttpClient, options).then(buildDefinitionsFromManifest);
 		},
-		enabled: !!data,
-	});
+		{ enabled: isSuccess },
+	);
 };
-
-export default useManifest;

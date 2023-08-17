@@ -1,16 +1,28 @@
-import { type FC, lazy, useState } from 'react';
+import { type FC, useState } from 'react';
 import { ErrorBoundary } from './components/Error';
+import Suspense from './components/Suspense';
+import ScrollToTop from './components/ScrollToTop';
+import Manifest from './components/Manifest';
 
-const Manifest = lazy(() => import('./components/Manifest'));
+// const Manifest = lazy(() => import('./components/Manifest'));
 
 export const App: FC = () => {
-	const [showManifest, setShowManifest] = useState(false);
+	const [manifest, setManifest] = useState(false);
 
 	return (
-		<ErrorBoundary name="D2 Recommended Root">
-			<button onClick={() => setShowManifest(true)}>Load Manifest</button>
-			{showManifest && (<Manifest />)}
-		</ErrorBoundary>
+		<div>
+			<ScrollToTop />
+			<ErrorBoundary name='App'>
+				<Suspense>
+					<button onClick={(): void => setManifest(true)}>Load Manifest</button>
+					{manifest && (
+						<Suspense>
+							<Manifest />
+						</Suspense>
+					)}
+				</Suspense>
+			</ErrorBoundary>
+		</div>
 	);
 };
 

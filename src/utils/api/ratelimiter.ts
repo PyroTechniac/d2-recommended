@@ -5,8 +5,8 @@ export class RateLimiterQueue {
 		fetcher: typeof fetch;
 		request: RequestInfo | URL;
 		options?: RequestInit;
-		resolver: (value?: any) => void;
-		rejecter: (value?: any) => void;
+		resolver: (value?: unknown) => void;
+		rejecter: (value?: unknown) => void;
 	}[] = [];
 
 	public count = 0;
@@ -35,10 +35,10 @@ export class RateLimiterQueue {
 		request: RequestInfo | URL,
 		options?: RequestInit,
 	): Promise<T> {
-		let resolver: (value?: any) => void = noop;
-		let rejecter: (value?: any) => void = noop;
+		let resolver: (value?: unknown) => void = noop;
+		let rejecter: (value?: unknown) => void = noop;
 		const promise = new Promise<T>((resolve, reject): void => {
-			resolver = resolve;
+			resolver = resolve as (value?: unknown) => void;
 			rejecter = reject;
 		});
 
@@ -98,7 +98,7 @@ export const rateLimitedFetch =
 	(fetcher: typeof fetch): typeof fetch =>
 	(request: RequestInfo | URL, options?: RequestInit) => {
 		const url = request instanceof Request ? request.url : request.toString();
-		let limiter;
+		let limiter: RateLimiterQueue | undefined;
 		for (const possibleLimiter of limiters) {
 			if (possibleLimiter.matches(url)) {
 				limiter = possibleLimiter;

@@ -12,19 +12,22 @@ interface State {
 }
 
 export class Boundary extends Component<BoundaryProps, State> {
-	public state: Readonly<State> = {};
-
-	public static whyDidYouRender = true;
+	public static override whyDidYouRender = true;
 	public static displayName: string = 'ErrorBoundary';
 
-	public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+	public constructor(props: BoundaryProps) {
+		super(props);
+		this.state = {};
+	}
+
+	public override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
 		const { name } = this.props;
 
 		this.setState({ error });
 		errorLog(name, error, errorInfo);
 	}
 
-	public render(): ReactNode {
+	public override render(): ReactNode {
 		const { error } = this.state;
 		const { children } = this.props;
 
@@ -33,6 +36,10 @@ export class Boundary extends Component<BoundaryProps, State> {
 		}
 
 		return children;
+	}
+
+	public static getDerivedStateFromError(error: Error): State {
+		return { error };
 	}
 }
 

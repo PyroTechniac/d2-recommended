@@ -1,12 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
-import { unauthenticatedHttpClient } from '../utils';
-import { getDestinyManifest } from 'bungie-api-ts/destiny2';
+import { type UseQueryResult, useQuery } from '@tanstack/react-query';
+import { dedupPromise, unauthenticatedHttpClient } from '../utils';
+import { type DestinyManifest, getDestinyManifest } from 'bungie-api-ts/destiny2';
 
-export const useRawManifest = () =>
-	useQuery(['rawManifest'], async () => {
-		const manifest = (await getDestinyManifest(unauthenticatedHttpClient)).Response;
+export const useRawManifest = (): UseQueryResult<DestinyManifest> =>
+	useQuery(['rawManifest'], () => {
+		const fetcher = dedupPromise(getDestinyManifest);
 
-		return manifest;
+		return fetcher(unauthenticatedHttpClient).then((res) => res.Response);
 	});
 
 export default useRawManifest;

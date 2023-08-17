@@ -49,7 +49,7 @@ export const Panel: FC<PanelProps> = ({ title, error, fallbackMessage, showReloa
 					</span>
 				)}
 			</p>
-			{showReload && <button onClick={() => window.location.reload()}>Reload</button>}
+			{showReload && <button onClick={(): void => window.location.reload()}>Reload</button>}
 		</div>
 	);
 };

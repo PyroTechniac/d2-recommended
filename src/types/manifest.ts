@@ -157,7 +157,7 @@ const UNSET_PLUG_HASH = 2166136261;
 export const buildDefinitionsFromManifest = (
 	db: AllDestinyManifestComponents,
 ): DestinyManifestDefinitions => {
-	const defs: { [table: string]: any } = {};
+	const defs: { [table: string]: unknown } = {};
 
 	for (const tableShort of lazyTables) {
 		const table = `Destiny${tableShort}Definition` as const;
@@ -167,7 +167,7 @@ export const buildDefinitionsFromManifest = (
 		}
 
 		defs[tableShort] = {
-			get: (id: number, requestor?: { hash: number } | string | number) => {
+			get: (id: number, requestor?: { hash: number } | string | number): AllDestinyManifestComponents[typeof table] => {
 				const dbEntry = dbTable[id];
 				if (!dbEntry && tableShort !== 'Record') {
 					if (id !== UNSET_PLUG_HASH) {
@@ -175,7 +175,8 @@ export const buildDefinitionsFromManifest = (
 					}
 				}
 
-				return dbEntry;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				return dbEntry as any;
 			},
 			getAll: () => dbTable,
 		};
@@ -186,5 +187,5 @@ export const buildDefinitionsFromManifest = (
 		defs[tableShort] = db[table];
 	}
 
-	return defs as DestinyManifestDefinitions;
+	return defs as unknown as DestinyManifestDefinitions;
 };
