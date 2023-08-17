@@ -1,6 +1,5 @@
 export * from './api';
 export * from './error';
-export * from './formatter';
 export * from './log';
 
 export const convertToError = (e: unknown): Error =>

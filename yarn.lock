@@ -12,22 +12,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:^0.8.2":
-  version: 0.8.8
-  resolution: "@emotion/is-prop-valid@npm:0.8.8"
-  dependencies:
-    "@emotion/memoize": 0.7.4
-  checksum: bb7ec6d48c572c540e24e47cc94fc2f8dec2d6a342ae97bc9c8b6388d9b8d283862672172a1bb62d335c02662afe6291e10c71e9b8642664a8b43416cdceffac
-  languageName: node
-  linkType: hard
-
-"@emotion/memoize@npm:0.7.4":
-  version: 0.7.4
-  resolution: "@emotion/memoize@npm:0.7.4"
-  checksum: 4e3920d4ec95995657a37beb43d3f4b7d89fed6caa2b173a4c04d10482d089d5c3ea50bbc96618d918b020f26ed6e9c4026bbd45433566576c1f7b056c3271dc
-  languageName: node
-  linkType: hard
-
 "@esbuild/android-arm64@npm:0.18.20":
   version: 0.18.20
   resolution: "@esbuild/android-arm64@npm:0.18.20"
@@ -586,6 +570,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-persist-client-core@npm:5.0.0-beta.15":
+  version: 5.0.0-beta.15
+  resolution: "@tanstack/query-persist-client-core@npm:5.0.0-beta.15"
+  dependencies:
+    "@tanstack/query-core": 5.0.0-beta.15
+  checksum: 21cc6512047ee983c1e0508e31719f29676de4963a405607a6c74c22714caefbd870804a17e09c296d4d5390150bf83da5cf06959bf04a91e2a80c05ed448d2f
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-sync-storage-persister@npm:5.0.0-beta.15":
+  version: 5.0.0-beta.15
+  resolution: "@tanstack/query-sync-storage-persister@npm:5.0.0-beta.15"
+  dependencies:
+    "@tanstack/query-core": 5.0.0-beta.15
+    "@tanstack/query-persist-client-core": 5.0.0-beta.15
+  checksum: dd1c8513a10a1cf12dcbc53ced9807a290ec980f723493ea38ef2acf070e68863db5e7cb1d0c74980b332087580cb40719435b6b2264e6e18e0cffe8ade92c52
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query-devtools@npm:5.0.0-beta.16":
   version: 5.0.0-beta.16
   resolution: "@tanstack/react-query-devtools@npm:5.0.0-beta.16"
@@ -596,6 +599,19 @@ __metadata:
     react: ^18.0.0
     react-dom: ^18.0.0
   checksum: 0842810e0ee4c61d39637338bdfda2fbf8d4eb19407747873d1beb6cb4e59bfe56aa9fb65ac0d87e6e4d4645d705503e88596053b6aed5028a24597ce7a02aab
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-persist-client@npm:5.0.0-beta.16":
+  version: 5.0.0-beta.16
+  resolution: "@tanstack/react-query-persist-client@npm:5.0.0-beta.16"
+  dependencies:
+    "@tanstack/query-persist-client-core": 5.0.0-beta.15
+  peerDependencies:
+    "@tanstack/react-query": ^5.0.0-beta.16
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 8e1fa089bf03b22597f4d2f1a78451aa505181cf95f22d4c7032cff72b4cedcb13e6250d0a650dc110a7815fc5a0afb3c198de79114b6f783a37c595043ee01d
   languageName: node
   linkType: hard
 
@@ -1353,8 +1369,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "d2-recommended@workspace:."
   dependencies:
+    "@tanstack/query-sync-storage-persister": 5.0.0-beta.15
     "@tanstack/react-query": 5.0.0-beta.16
     "@tanstack/react-query-devtools": 5.0.0-beta.16
+    "@tanstack/react-query-persist-client": 5.0.0-beta.16
     "@types/lodash": ^4.14.197
     "@types/node": ^20.5.0
     "@types/react": ^18.2.15
@@ -1371,7 +1389,6 @@ __metadata:
     eslint-plugin-react: ^7.33.1
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.3
-    framer-motion: ^10.15.2
     lodash: ^4.17.21
     npm-run-all: ^4.1.5
     postcss: ^8.4.27
@@ -1386,7 +1403,6 @@ __metadata:
     vite: ^4.4.5
     vite-plugin-mkcert: ^1.16.0
     vite-plugin-sass-dts: ^1.3.9
-    zustand: ^4.4.1
   languageName: unknown
   linkType: soft
 
@@ -2003,27 +2019,6 @@ __metadata:
     combined-stream: ^1.0.8
     mime-types: ^2.1.12
   checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
-  languageName: node
-  linkType: hard
-
-"framer-motion@npm:^10.15.2":
-  version: 10.15.2
-  resolution: "framer-motion@npm:10.15.2"
-  dependencies:
-    "@emotion/is-prop-valid": ^0.8.2
-    tslib: ^2.4.0
-  peerDependencies:
-    react: ^18.0.0
-    react-dom: ^18.0.0
-  dependenciesMeta:
-    "@emotion/is-prop-valid":
-      optional: true
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 57dc428f11d140eddc4a6d2fd68489ae5613af21407d92afee0bd626ef284488a8d84decb68f07ea790882137c1587f6177bd322a25477cfbbda07d0949cb8fe
   languageName: node
   linkType: hard
 
@@ -4122,13 +4117,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.4.0":
-  version: 2.6.1
-  resolution: "tslib@npm:2.6.1"
-  checksum: b0d176d176487905b66ae4d5856647df50e37beea7571c53b8d10ba9222c074b81f1410fb91da13debaf2cbc970663609068bdebafa844ea9d69b146527c38fe
-  languageName: node
-  linkType: hard
-
 "type-check@npm:^0.4.0, type-check@npm:~0.4.0":
   version: 0.4.0
   resolution: "type-check@npm:0.4.0"
@@ -4255,15 +4243,6 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
-  languageName: node
-  linkType: hard
-
-"use-sync-external-store@npm:1.2.0":
-  version: 1.2.0
-  resolution: "use-sync-external-store@npm:1.2.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 
@@ -4495,25 +4474,5 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
-  languageName: node
-  linkType: hard
-
-"zustand@npm:^4.4.1":
-  version: 4.4.1
-  resolution: "zustand@npm:4.4.1"
-  dependencies:
-    use-sync-external-store: 1.2.0
-  peerDependencies:
-    "@types/react": ">=16.8"
-    immer: ">=9.0"
-    react: ">=16.8"
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    immer:
-      optional: true
-    react:
-      optional: true
-  checksum: 80acd0fbf633782996642802c8692bbb80ae5c80a8dff4c501b88250acd5ccd468fbc6398bdce198475a25e3839c91385b81da921274f33ffb5c2d08c3eab400
   languageName: node
   linkType: hard

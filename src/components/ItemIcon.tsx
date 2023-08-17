@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { useManifest } from '../hooks';
 
 export const ItemIcon: FC = () => {
-	const { data } = useManifest();
+	const data = useManifest();
 
 	const all = data!.InventoryItem.getAll();
 
@@ -10,7 +10,7 @@ export const ItemIcon: FC = () => {
 
 	console.log(all[firstKey]);
 
-	return <p>{JSON.stringify(all[firstKey], null, 4)}</p>;
+	return null;
 };
 
 ItemIcon.whyDidYouRender = true;

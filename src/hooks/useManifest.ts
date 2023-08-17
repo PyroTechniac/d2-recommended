@@ -1,28 +1,36 @@
-import { type UseSuspenseQueryResult, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import {
 	type GetAllDestinyManifestComponentsParams,
 	getAllDestinyManifestComponents,
+	getDestinyManifest,
+	DestinyManifest,
 } from 'bungie-api-ts/destiny2';
 import { dedupPromise, unauthenticatedHttpClient } from '../utils';
-import useRawManifest from './useRawManifest';
-import { DestinyManifestDefinitions, buildDefinitionsFromManifest } from '../types';
+import { type DestinyManifestDefinitions, buildDefinitionsFromManifest } from '../types';
 
-export const useManifest = (): UseSuspenseQueryResult<DestinyManifestDefinitions> => {
-	const { data } = useRawManifest();
+export const useManifest = (): DestinyManifestDefinitions => {
+	const { data: destinyManifest } = useSuspenseQuery({
+		queryKey: ['manifest', 'raw'],
+		queryFn: () =>
+			dedupPromise(getDestinyManifest)(unauthenticatedHttpClient).then(
+				(res): DestinyManifest => res.Response,
+			),
+	});
 
-	return useSuspenseQuery({
-		queryKey: ['manifest'],
+	const { data } = useSuspenseQuery({
+		queryKey: ['manifest', 'all'],
 		queryFn: () => {
 			const options: GetAllDestinyManifestComponentsParams = {
-				destinyManifest: data,
+				destinyManifest,
 				language: 'en',
 			};
 
-			const fetcher = dedupPromise(getAllDestinyManifestComponents);
-
-			return fetcher(unauthenticatedHttpClient, options).then(buildDefinitionsFromManifest);
+			return dedupPromise(getAllDestinyManifestComponents)(
+				unauthenticatedHttpClient,
+				options,
+			);
 		},
 	});
-};
 
-export default useManifest;
+	return buildDefinitionsFromManifest(data);
+};

@@ -5,10 +5,10 @@ import {
 } from 'react';
 import Loader from './Loader';
 
-export type SuspenseProps = Omit<ReactSuspenseProps, 'fallback'>;
+export type SuspenseProps = Omit<ReactSuspenseProps, 'fallback'> & { message?: string };
 
-export const Suspense: FC<SuspenseProps> = ({ ...props }) => (
-	<ReactSuspense fallback={<Loader />} {...props} />
+export const Suspense: FC<SuspenseProps> = ({ message, ...props }) => (
+	<ReactSuspense fallback={<Loader message={message} />} {...props} />
 );
 
 Suspense.whyDidYouRender = true;

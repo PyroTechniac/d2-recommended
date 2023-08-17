@@ -1,23 +1,26 @@
-import { type FC, useState, lazy } from 'react';
+import { type FC, lazy } from 'react';
 import { ErrorBoundary } from './components/Error';
-import { Suspense, ScrollToTop } from './components/utils';
+import { ScrollToTop, Suspense } from './components/utils';
+import { useIsFetching, useIsRestoring } from '@tanstack/react-query';
 
 const Manifest = lazy(() => import('./components/Manifest'));
 
 export const App: FC = () => {
-	const [manifest, setManifest] = useState(false);
+	const isFetching = useIsFetching();
+	const isRestoring = useIsRestoring();
+
+	const message = isRestoring
+		? 'Restoring manifest'
+		: isFetching
+		? 'Fetching manifest'
+		: 'Loading manifest';
 
 	return (
 		<div>
 			<ScrollToTop />
 			<ErrorBoundary name="App">
-				<Suspense>
-					<button onClick={(): void => setManifest(true)}>Load Manifest</button>
-					{manifest && (
-						<Suspense>
-							<Manifest />
-						</Suspense>
-					)}
+				<Suspense message={message}>
+					<Manifest />
 				</Suspense>
 			</ErrorBoundary>
 		</div>
