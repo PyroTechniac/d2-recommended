@@ -167,7 +167,10 @@ export const buildDefinitionsFromManifest = (
 		}
 
 		defs[tableShort] = {
-			get: (id: number, requestor?: { hash: number } | string | number): AllDestinyManifestComponents[typeof table] => {
+			get: (
+				id: number,
+				requestor?: { hash: number } | string | number,
+			): AllDestinyManifestComponents[typeof table] => {
 				const dbEntry = dbTable[id];
 				if (!dbEntry && tableShort !== 'Record') {
 					if (id !== UNSET_PLUG_HASH) {

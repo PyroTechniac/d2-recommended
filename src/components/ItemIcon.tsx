@@ -10,7 +10,7 @@ export const ItemIcon: FC = () => {
 
 	console.log(all[firstKey]);
 
-	return <p>{JSON.stringify(all[firstKey], null, 4)}</p>
+	return <p>{JSON.stringify(all[firstKey], null, 4)}</p>;
 };
 
 ItemIcon.whyDidYouRender = true;

@@ -10,7 +10,9 @@ import useRawManifest from './useRawManifest';
 
 export const useDestinyComponents = <T extends readonly DestinyManifestComponentName[]>(
 	keys: T,
-): UseQueryResult<{ -readonly [P in keyof AllDestinyManifestComponents]: AllDestinyManifestComponents[P]; }>[] => {
+): UseQueryResult<{
+	-readonly [P in keyof AllDestinyManifestComponents]: AllDestinyManifestComponents[P];
+}>[] => {
 	const { data, isSuccess } = useRawManifest();
 
 	return useQueries({

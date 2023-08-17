@@ -31,7 +31,10 @@ export class RecommendedError extends Error {
 		...args: unknown[]
 	) {
 		const messageTmp = errorCodes[code];
-		const message = typeof messageTmp === 'function' ? (messageTmp as (...args: unknown[]) => string)(...args) : messageTmp;
+		const message =
+			typeof messageTmp === 'function'
+				? (messageTmp as (...args: unknown[]) => string)(...args)
+				: messageTmp;
 		super(message);
 	}
 
@@ -44,7 +47,7 @@ export class RecommendedError extends Error {
 		return this.cause instanceof BungieError
 			? this.cause.code
 			: this.cause instanceof RecommendedError
-				? this.cause.bungieErrorCode()
-				: undefined;
+			? this.cause.bungieErrorCode()
+			: undefined;
 	}
 }

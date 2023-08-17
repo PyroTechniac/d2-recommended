@@ -12,7 +12,7 @@ export const App: FC = () => {
 	return (
 		<div>
 			<ScrollToTop />
-			<ErrorBoundary name='App'>
+			<ErrorBoundary name="App">
 				<Suspense>
 					<button onClick={(): void => setManifest(true)}>Load Manifest</button>
 					{manifest && (
