@@ -5,11 +5,9 @@ import ItemIcon from './ItemIcon';
 // const ItemIcon = lazy(() => import('./ItemIcon'));
 
 export const Manifest: FC = () => {
-	const { data, error } = useManifest();
+	const { data } = useManifest();
 
 	console.log(data);
-
-	if (error) return <div>Manifest failed to load</div>;
 
 	return (
 		<>
